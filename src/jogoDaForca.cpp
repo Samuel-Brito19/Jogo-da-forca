@@ -16,8 +16,7 @@ string returnRandomWord()
     string words[3] = {"Hearthstone", "Love", "Gangster"};
 
     int aleatoryIndex = rand() % 3;
-    cout << words[aleatoryIndex];
-
+    // cout << words[aleatoryIndex];
     return words[aleatoryIndex];
 }
 
@@ -36,6 +35,12 @@ string returnMaskedWord(string word, int wordSize)
     return wordWithMask;
 }
 
+void showStatus(string wordWithMask, int wordSize, int attemptsLeft)
+{
+    cout << "Word: " << wordWithMask << "(Size: " << wordSize << ")";
+    cout << "\nAttempts left: " << attemptsLeft;
+}
+
 void playAlone()
 {
     string word = returnRandomWord();
@@ -43,6 +48,19 @@ void playAlone()
     int wordSize = word.size();
 
     string wordWithMask = returnMaskedWord(word, wordSize);
+
+    int attempts = 0, maxAttempts = 10;
+    char letter;
+
+    while (maxAttempts - attempts > 0)
+    {
+        // cout << "The secret word is " << word << "The size of the word is" << wordSize;
+        showStatus(wordWithMask, wordSize, maxAttempts - attempts);
+        cout << "\nType a letter: ";
+        cin >> letter;
+
+        attempts++;
+    }
 }
 
 void initialMenu()
