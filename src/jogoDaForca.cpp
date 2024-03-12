@@ -11,6 +11,21 @@ void cleanScreen()
     system("CLS");
 }
 
+string returnRandomWord()
+{
+    string palavras[3] = {"Hearthstone", "Love", "Gangster"};
+
+    int aleatoryIndex = rand() % 3;
+    cout << palavras[aleatoryIndex];
+
+    return palavras[aleatoryIndex];
+}
+
+void playAlone()
+{
+    string palavra = returnRandomWord();
+}
+
 void initialMenu()
 {
     int option = 0;
@@ -27,7 +42,7 @@ void initialMenu()
         {
         case 1:
             /* code */
-            cout << "Jogo iniciado";
+            playAlone();
             break;
         case 2:
             /* code */
@@ -43,6 +58,7 @@ void initialMenu()
 
 int main()
 {
+    srand((unsigned)time(NULL));
 
     initialMenu();
     return 0;
