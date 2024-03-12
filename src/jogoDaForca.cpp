@@ -13,17 +13,36 @@ void cleanScreen()
 
 string returnRandomWord()
 {
-    string palavras[3] = {"Hearthstone", "Love", "Gangster"};
+    string words[3] = {"Hearthstone", "Love", "Gangster"};
 
     int aleatoryIndex = rand() % 3;
-    cout << palavras[aleatoryIndex];
+    cout << words[aleatoryIndex];
 
-    return palavras[aleatoryIndex];
+    return words[aleatoryIndex];
+}
+
+string returnMaskedWord(string word, int wordSize)
+{
+    int count = 0;
+
+    string wordWithMask;
+
+    while (count < wordSize)
+    {
+        wordWithMask += "_";
+        count++;
+    }
+
+    return wordWithMask;
 }
 
 void playAlone()
 {
-    string palavra = returnRandomWord();
+    string word = returnRandomWord();
+
+    int wordSize = word.size();
+
+    string wordWithMask = returnMaskedWord(word, wordSize);
 }
 
 void initialMenu()
@@ -32,11 +51,11 @@ void initialMenu()
     while ((option < 1 || option > 3))
     {
         cleanScreen();
-        cout << "Bem vindo ao jogo";
-        cout << "\n1 - Jogar";
-        cout << "\n2 - Sobre";
-        cout << "\n3 - Sair";
-        cout << "\n Escolha uma opção e tecle enter: ";
+        cout << "Welcome to the game!";
+        cout << "\n1 - Play";
+        cout << "\n2 - About";
+        cout << "\n3 - Exit";
+        cout << "\n Choose an option and press enter: ";
         cin >> option;
         switch (option)
         {
@@ -46,11 +65,11 @@ void initialMenu()
             break;
         case 2:
             /* code */
-            cout << "Informaçoes do jogo";
+            cout << "Informations about the game";
             break;
         case 3:
             /* code */
-            cout << "Ate mais";
+            cout << "Until next time!";
             break;
         }
     }
