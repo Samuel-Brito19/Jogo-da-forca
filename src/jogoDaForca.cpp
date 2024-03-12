@@ -13,7 +13,7 @@ void cleanScreen()
 
 string returnRandomWord()
 {
-    string words[3] = {"Hearthstone", "Love", "Gangster"};
+    string words[3] = {"hearthstone", "love", "gangster"};
 
     int aleatoryIndex = rand() % 3;
     // cout << words[aleatoryIndex];
@@ -50,16 +50,33 @@ void playAlone()
     string wordWithMask = returnMaskedWord(word, wordSize);
 
     int attempts = 0, maxAttempts = 10;
+    int count = 0;
     char letter;
 
-    while (maxAttempts - attempts > 0)
+    while (word != wordWithMask && maxAttempts - attempts > 0)
     {
         // cout << "The secret word is " << word << "The size of the word is" << wordSize;
         showStatus(wordWithMask, wordSize, maxAttempts - attempts);
         cout << "\nType a letter: ";
         cin >> letter;
 
+        for (count = 0; count < wordSize; count++)
+        {
+            if (word[count] == letter)
+            {
+                wordWithMask[count] = word[count];
+            }
+        }
+
         attempts++;
+    }
+    if (word == wordWithMask)
+    {
+        cout << "Congrats! You won.";
+    }
+    else
+    {
+        cout << "Too bad :( You lost.";
     }
 }
 
