@@ -98,7 +98,7 @@ int playAlone()
 
         if (alreadyTyped == false)
         {
-            attemptedLetters += letter;
+            attemptedLetters += tolower(letter);
 
             for (count = 0; count < wordSize; count++)
             {
