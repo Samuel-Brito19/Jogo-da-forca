@@ -35,10 +35,18 @@ string returnMaskedWord(string word, int wordSize)
     return wordWithMask;
 }
 
-void showStatus(string wordWithMask, int wordSize, int attemptsLeft)
+void showStatus(string wordWithMask, int wordSize, int attemptsLeft, string attemptedLetters, string message)
 {
-    cout << "Word: " << wordWithMask << "(Size: " << wordSize << ")";
+    cout << message;
+    cout << "\nWord: " << wordWithMask << "(Size: " << wordSize << ")";
     cout << "\nAttempts left: " << attemptsLeft;
+
+    int count;
+    cout << "\nAttemptedLetters: ";
+    for (count = 0; count < attemptedLetters.size(); count++)
+    {
+        cout << attemptedLetters[count] << ", ";
+    }
 }
 
 void playAlone()
@@ -52,24 +60,54 @@ void playAlone()
     int attempts = 0, maxAttempts = 10;
     int count = 0;
     char letter;
+    string attemptedLetters;
+    string message;
+    bool alreadyTyped = false, guessedLetter;
 
     while (word != wordWithMask && maxAttempts - attempts > 0)
     {
         // cout << "The secret word is " << word << "The size of the word is" << wordSize;
-        showStatus(wordWithMask, wordSize, maxAttempts - attempts);
+        showStatus(wordWithMask, wordSize, maxAttempts - attempts, attemptedLetters, message);
         cout << "\nType a letter: ";
         cin >> letter;
 
-        for (count = 0; count < wordSize; count++)
+        for (count = 0; count < attempts; count++)
         {
-            if (word[count] == letter)
+            if (attemptedLetters[count] == letter)
             {
-                wordWithMask[count] = word[count];
+                message = "This letter has been typed already";
+                alreadyTyped = true;
             }
         }
 
-        attempts++;
+        if (alreadyTyped == false)
+        {
+            attemptedLetters += letter;
+
+            for (count = 0; count < wordSize; count++)
+            {
+                if (word[count] == letter)
+                {
+                    wordWithMask[count] = word[count];
+                    guessedLetter = true;
+                }
+            }
+            if (guessedLetter = false)
+            {
+                message = "You got it wrong";
+            }
+            else
+            {
+                message = "You got it right";
+                guessedLetter = false;
+            }
+
+            attempts++;
+        }
+        alreadyTyped = false;
+        guessedLetter = false;
     }
+
     if (word == wordWithMask)
     {
         cout << "Congrats! You won.";
