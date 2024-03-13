@@ -61,15 +61,29 @@ void playAlone()
     int count = 0;
     char letter;
     string attemptedLetters;
-    string message;
+    string message = "Welcome to the game";
+    string attemptedWord;
     bool alreadyTyped = false, guessedLetter;
 
     while (word != wordWithMask && maxAttempts - attempts > 0)
     {
         // cout << "The secret word is " << word << "The size of the word is" << wordSize;
         showStatus(wordWithMask, wordSize, maxAttempts - attempts, attemptedLetters, message);
-        cout << "\nType a letter: ";
+        cout << "\nType a letter (Or type 1 if you want to spell the entire word): ";
         cin >> letter;
+
+        if (letter == '1')
+        {
+            cin >> attemptedWord;
+            if (attemptedWord == word)
+            {
+                wordWithMask = attemptedWord;
+            }
+            else
+            {
+                attempts = maxAttempts;
+            }
+        }
 
         for (count = 0; count < attempts; count++)
         {
@@ -111,10 +125,12 @@ void playAlone()
     if (word == wordWithMask)
     {
         cout << "Congrats! You won.";
+        cout << "\nWants to play again?";
     }
     else
     {
         cout << "Too bad :( You lost.";
+        cout << "\nWants to play again?";
     }
 }
 
