@@ -49,9 +49,19 @@ void showStatus(string wordWithMask, int wordSize, int attemptsLeft, string atte
     }
 }
 
-int playAlone()
+int play(int numberOfPlayers)
 {
-    string word = returnRandomWord();
+
+    string word;
+    if (numberOfPlayers == 1)
+    {
+        word = returnRandomWord();
+    }
+    else
+    {
+        cout << "\nType a word: ";
+        cin >> word;
+    }
 
     int wordSize = word.size();
 
@@ -153,23 +163,27 @@ void initialMenu()
     {
         cleanScreen();
         cout << "Welcome to the game!";
-        cout << "\n1 - Play";
-        cout << "\n2 - About";
-        cout << "\n3 - Exit";
+        cout << "\n1 - Play alone";
+        cout << "\n2 - Play with a friend";
+        cout << "\n3 - About";
+        cout << "\n4 - Exit";
         cout << "\n Choose an option and press enter: ";
         cin >> option;
         switch (option)
         {
         case 1:
             /* code */
-            if (playAlone() == 1)
+            if (play(1))
             {
                 initialMenu();
             }
             break;
         case 2:
             /* code */
-            cout << "Informations about the game";
+            if (play(2))
+            {
+                initialMenu();
+            }
             break;
         case 3:
             /* code */
