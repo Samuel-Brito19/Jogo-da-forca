@@ -8,7 +8,7 @@ using namespace std;
 
 void cleanScreen()
 {
-    system("CLS");
+    system("clear");
 }
 
 string returnRandomWord()
@@ -49,7 +49,7 @@ void showStatus(string wordWithMask, int wordSize, int attemptsLeft, string atte
     }
 }
 
-void playAlone()
+int playAlone()
 {
     string word = returnRandomWord();
 
@@ -60,6 +60,7 @@ void playAlone()
     int attempts = 0, maxAttempts = 10;
     int count = 0;
     char letter;
+    int option;
     string attemptedLetters;
     string message = "Welcome to the game";
     string attemptedWord;
@@ -67,6 +68,7 @@ void playAlone()
 
     while (word != wordWithMask && maxAttempts - attempts > 0)
     {
+        cleanScreen();
         // cout << "The secret word is " << word << "The size of the word is" << wordSize;
         showStatus(wordWithMask, wordSize, maxAttempts - attempts, attemptedLetters, message);
         cout << "\nType a letter (Or type 1 if you want to spell the entire word): ";
@@ -100,7 +102,7 @@ void playAlone()
 
             for (count = 0; count < wordSize; count++)
             {
-                if (word[count] == letter)
+                if (word[count] == tolower(letter))
                 {
                     wordWithMask[count] = word[count];
                     guessedLetter = true;
@@ -124,13 +126,23 @@ void playAlone()
 
     if (word == wordWithMask)
     {
+        cleanScreen();
         cout << "Congrats! You won.";
         cout << "\nWants to play again?";
+        cout << "\n1 - Yes";
+        cout << "\n2 - No";
+        cin >> option;
+        return option;
     }
     else
     {
+        cleanScreen();
         cout << "Too bad :( You lost.";
         cout << "\nWants to play again?";
+        cout << "\n1 - Yes";
+        cout << "\n2 - No";
+        cin >> option;
+        return option;
     }
 }
 
@@ -150,7 +162,10 @@ void initialMenu()
         {
         case 1:
             /* code */
-            playAlone();
+            if (playAlone() == 1)
+            {
+                initialMenu();
+            }
             break;
         case 2:
             /* code */
@@ -158,7 +173,16 @@ void initialMenu()
             break;
         case 3:
             /* code */
-            cout << "Until next time!";
+            cout << "Game informations";
+            cleanScreen();
+            cout << "Game developed by Samuel in 2024";
+            cout << "\n1 - Back";
+            cout << "\n2 - Exit";
+            cin >> option;
+            if (option == 1)
+            {
+                initialMenu();
+            }
             break;
         }
     }
