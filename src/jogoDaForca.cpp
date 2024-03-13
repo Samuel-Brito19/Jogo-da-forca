@@ -189,7 +189,7 @@ void initialMenu()
             /* code */
             cout << "Game informations";
             cleanScreen();
-            cout << "Game developed by Samuel in 2024";
+            cout << "\n\nGame developed by Samuel in 2024";
             cout << "\n1 - Back";
             cout << "\n2 - Exit";
             cin >> option;
@@ -197,6 +197,9 @@ void initialMenu()
             {
                 initialMenu();
             }
+            break;
+        case 4:
+            cout << "By by";
             break;
         }
     }
